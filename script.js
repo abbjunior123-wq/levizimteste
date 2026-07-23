@@ -46,11 +46,15 @@
         layer.style.setProperty("--scroll-y", `${shift.toFixed(2)}px`);
       });
 
-      const heroTravel = Math.min(scrollTop, viewportHeight * 1.15);
-      heroShiftItems.forEach((item) => {
-        const factor = Number(item.dataset.heroShift) || 0;
-        item.style.setProperty("--scroll-x", `${(heroTravel * factor).toFixed(2)}px`);
-      });
+      if (window.innerWidth > 820) {
+        const heroTravel = Math.min(scrollTop, viewportHeight * 1.15);
+        heroShiftItems.forEach((item) => {
+          const factor = Number(item.dataset.heroShift) || 0;
+          item.style.setProperty("--scroll-x", `${(heroTravel * factor).toFixed(2)}px`);
+        });
+      } else {
+        heroShiftItems.forEach((item) => item.style.setProperty("--scroll-x", "0px"));
+      }
     }
 
     scrollFrame = 0;
@@ -88,17 +92,28 @@
   if (reducedMotion || !("IntersectionObserver" in window)) {
     revealItems.forEach((item) => item.classList.add("is-visible"));
   } else {
+    const revealTargets = new Map();
+    revealItems.forEach((item) => {
+      const usesClip = ["clip", "clip-reverse"].includes(item.dataset.reveal);
+      const target = usesClip ? item.parentElement || item : item;
+      const items = revealTargets.get(target) || [];
+      items.push(item);
+      revealTargets.set(target, items);
+    });
+
     const revealObserver = new IntersectionObserver(
       (entries, observer) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
+          (revealTargets.get(entry.target) || [entry.target]).forEach((item) => {
+            item.classList.add("is-visible");
+          });
           observer.unobserve(entry.target);
         });
       },
-      { threshold: 0.12, rootMargin: "0px 0px -7% 0px" }
+      { threshold: 0.08, rootMargin: "0px 0px -7% 0px" }
     );
-    revealItems.forEach((item) => revealObserver.observe(item));
+    revealTargets.forEach((_, target) => revealObserver.observe(target));
   }
 
   const sceneButtons = Array.from(document.querySelectorAll("[data-scene-button]"));

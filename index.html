@@ -95,20 +95,32 @@
       </div>
     </div>
 
-    <section class="artist-section section" id="artista">
-      <div class="section-number" aria-hidden="true">01</div>
-      <div class="artist-visual reveal">
-        <img src="levizim-extract-07.jpg" width="1066" height="1600" decoding="async" alt="Levizim cantando e tocando cavaquinho em um show" />
-        <span class="photo-stamp">AO VIVO<br />SEM FILTRO</span>
-      </div>
+    <section class="artist-section" id="artista" aria-labelledby="artist-title">
+      <div class="artist-backdrop-word" aria-hidden="true">LEVIZIM</div>
 
-      <div class="artist-copy">
-        <p class="eyebrow reveal">Cantor. Compositor. Condutor de pista.</p>
-        <h2 class="section-title reveal">Levizim não acompanha a festa. <em>Ele muda o clima dela.</em></h2>
-        <p class="lead reveal">Levi Ruben começou a cantar aos 8 anos e, aos 13, já vivia os primeiros palcos. Hoje, une o piseiro romântico ao forró moderno em uma apresentação que lê o público e cresce junto com a noite.</p>
-        <p class="body-copy reveal">Por trás do microfone está também o compositor de músicas gravadas por nomes como Nattan, Tierry, Solange Almeida, Matheus Fernandes, Xand Avião e Hugo &amp; Guilherme. Quem cria canções entende o momento exato em que a emoção vira refrão — e em que a festa pede mais.</p>
+      <div class="artist-stage">
+        <figure class="artist-visual reveal" data-reveal="clip">
+          <img src="levizim-extract-07.jpg" width="1066" height="1600" decoding="async" alt="Levizim cantando e tocando cavaquinho em um show" />
+          <figcaption>
+            <span>AO VIVO</span>
+            <strong>Levi Ruben</strong>
+            <small>Fortaleza · Brasil</small>
+          </figcaption>
+          <span class="photo-stamp">SEM<br />DISTÂNCIA</span>
+        </figure>
 
-        <div class="artist-stats reveal" aria-label="Destaques da trajetória de Levizim">
+        <div class="artist-headline">
+          <p class="eyebrow reveal" data-reveal="left">Cantor · compositor · condutor de pista</p>
+          <h2 class="section-title reveal" data-reveal="clip-reverse" id="artist-title">Não é trilha.<br /><em>É o artista que muda a festa.</em></h2>
+        </div>
+
+        <div class="artist-copy-card reveal" data-reveal="right">
+          <span class="artist-card-index" aria-hidden="true">01 / O ARTISTA</span>
+          <p class="lead">Levi Ruben começou a cantar aos 8 anos. Hoje, transforma repertório, presença e leitura de público em um show que parece ter nascido dentro da própria celebração.</p>
+          <p class="body-copy">Por trás do microfone está também o compositor de músicas gravadas por Nattan, Tierry, Solange Almeida, Matheus Fernandes, Xand Avião e Hugo &amp; Guilherme. Quem cria canções reconhece o instante em que emoção vira refrão — e a festa pede mais.</p>
+        </div>
+
+        <div class="artist-stats reveal" data-reveal="scale" aria-label="Destaques da trajetória de Levizim">
           <div><strong>+300</strong><span>composições gravadas</span></div>
           <div><strong>08</strong><span>anos: o começo na música</span></div>
           <div><strong>01</strong><span>show desenhado para cada evento</span></div>
@@ -147,7 +159,7 @@
       </div>
     </section>
 
-    <section class="performance-cut" aria-labelledby="performance-title">
+    <section class="performance-cut" id="presenca" aria-labelledby="performance-title">
       <div class="performance-heading section">
         <div>
           <p class="eyebrow reveal" data-reveal="left">Presença de palco · conexão real</p>
@@ -300,6 +312,9 @@
     </section>
 
     <section class="contact-section" id="contato">
+      <span class="contact-backdrop-word" aria-hidden="true">AGENDA</span>
+      <img class="contact-signature" src="levizim-logo.png" width="591" height="232" alt="" aria-hidden="true" />
+
       <div class="contact-copy">
         <p class="eyebrow reveal">Agenda Levizim</p>
         <h2 class="contact-title reveal">Qual é a data da <span>primeira festa</span> do seu casamento?</h2>
@@ -311,6 +326,10 @@
       </div>
 
       <form class="contact-form reveal" id="booking-form" action="https://wa.me/5585997684934" method="get" target="_blank">
+        <div class="form-heading">
+          <span>CONVITE ABERTO</span>
+          <strong>Conte como vocês imaginam esse começo.</strong>
+        </div>
         <div class="field-row">
           <label for="nome">Seu nome<input id="nome" autocomplete="name" required /></label>
           <label for="whatsapp">WhatsApp<input id="whatsapp" type="tel" inputmode="tel" autocomplete="tel" required /></label>
