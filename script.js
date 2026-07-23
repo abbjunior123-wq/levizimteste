@@ -138,25 +138,121 @@
     });
   }
 
-  const showreel = document.querySelector(".showreel-video");
-  const videoControl = document.querySelector("[data-video-control]");
-  if (showreel && videoControl) {
-    const updateVideoControl = () => {
-      const paused = showreel.paused;
-      videoControl.textContent = paused ? "Reproduzir filme" : "Pausar filme";
-      videoControl.setAttribute("aria-label", paused ? "Reproduzir vídeo" : "Pausar vídeo");
+  const filmStory = document.querySelector(".film-story");
+  const filmSteps = Array.from(document.querySelectorAll("[data-film-step]"));
+  const filmVideos = Array.from(document.querySelectorAll("[data-film-video]"));
+  const filmCurrent = document.querySelector("[data-film-current]");
+  const filmProgress = document.querySelector("[data-film-progress]");
+  const filmControl = document.querySelector("[data-film-control]");
+  const filmControlLabel = document.querySelector("[data-film-control-label]");
+
+  if (filmStory && filmSteps.length && filmVideos.length) {
+    let activeFilm = 0;
+    let filmInView = false;
+    let filmUserPaused = false;
+
+    const syncFilmControl = () => {
+      if (!filmControl) return;
+      const activeVideo = filmVideos[activeFilm];
+      const paused = filmUserPaused || !activeVideo || activeVideo.paused;
+      const label = paused ? "Reproduzir filme" : "Pausar filme";
+      filmControl.classList.toggle("is-paused", paused);
+      filmControl.setAttribute("aria-label", label);
+      if (filmControlLabel) filmControlLabel.textContent = label;
     };
 
-    updateVideoControl();
-    showreel.addEventListener("play", updateVideoControl);
-    showreel.addEventListener("pause", updateVideoControl);
-    videoControl.addEventListener("click", () => {
-      if (showreel.paused) {
-        showreel.play().catch(() => {});
-      } else {
-        showreel.pause();
+    const playActiveFilm = () => {
+      if (reducedMotion || saveData || filmUserPaused || !filmInView) {
+        syncFilmControl();
+        return;
       }
+      filmVideos[activeFilm]?.play().catch(syncFilmControl);
+    };
+
+    const activateFilm = (index) => {
+      const next = Math.min(filmVideos.length - 1, Math.max(0, Number(index) || 0));
+      const changed = next !== activeFilm;
+      activeFilm = next;
+      filmStory.dataset.filmAct = String(activeFilm);
+
+      filmSteps.forEach((step, stepIndex) => {
+        step.classList.toggle("is-active", stepIndex === activeFilm);
+      });
+
+      filmVideos.forEach((video, videoIndex) => {
+        const active = videoIndex === activeFilm;
+        video.classList.toggle("is-active", active);
+        if (!active) {
+          video.pause();
+          return;
+        }
+        if (changed) {
+          try {
+            video.currentTime = 0;
+          } catch {
+            // O poster permanece visível até o navegador liberar o seek.
+          }
+        }
+      });
+
+      if (filmCurrent) filmCurrent.textContent = String(activeFilm + 1).padStart(2, "0");
+      if (filmProgress) filmProgress.style.width = `${((activeFilm + 1) / filmSteps.length) * 100}%`;
+      playActiveFilm();
+      syncFilmControl();
+    };
+
+    if ("IntersectionObserver" in window) {
+      const filmStepObserver = new IntersectionObserver(
+        (entries) => {
+          const activeEntry = entries.find((entry) => entry.isIntersecting);
+          if (activeEntry) activateFilm(activeEntry.target.dataset.filmStep);
+        },
+        { threshold: 0, rootMargin: "-43% 0px -43% 0px" }
+      );
+      filmSteps.forEach((step) => filmStepObserver.observe(step));
+
+      const filmVisibilityObserver = new IntersectionObserver(
+        ([entry]) => {
+          filmInView = Boolean(entry?.isIntersecting);
+          if (filmInView) {
+            playActiveFilm();
+          } else {
+            filmVideos.forEach((video) => video.pause());
+          }
+          syncFilmControl();
+        },
+        { threshold: 0.01, rootMargin: "18% 0px" }
+      );
+      filmVisibilityObserver.observe(filmStory);
+    } else {
+      filmInView = true;
+    }
+
+    filmVideos.forEach((video) => {
+      video.addEventListener("play", syncFilmControl);
+      video.addEventListener("pause", syncFilmControl);
     });
+
+    if (filmControl) {
+      if (reducedMotion || saveData) {
+        filmControl.disabled = true;
+        filmControl.classList.add("is-paused");
+        filmControl.setAttribute("aria-label", "Filme pausado para economizar dados ou reduzir movimento");
+        if (filmControlLabel) filmControlLabel.textContent = "Filme pausado";
+      } else {
+        filmControl.addEventListener("click", () => {
+          filmUserPaused = !filmUserPaused;
+          if (filmUserPaused) {
+            filmVideos[activeFilm]?.pause();
+          } else {
+            playActiveFilm();
+          }
+          syncFilmControl();
+        });
+      }
+    }
+
+    activateFilm(0);
   }
 
   const dateInput = document.getElementById("data");

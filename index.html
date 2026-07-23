@@ -6,13 +6,18 @@
   <meta name="theme-color" content="#080808" />
   <title>Levizim | Pré-wedding ao vivo</title>
   <meta name="description" content="Levizim ao vivo no seu pré-wedding: repertório sob medida, presença de palco e uma festa que começa antes do sim." />
+  <link rel="canonical" href="https://levizim-pre-wedding.joao2444g.chatgpt.site/" />
   <meta property="og:title" content="Levizim | Antes do sim, a festa já tem nome" />
   <meta property="og:description" content="Uma experiência musical ao vivo para pré-weddings, welcome parties e celebrações de casamento." />
   <meta property="og:type" content="website" />
-  <meta property="og:image" content="casal-brinde.jpg" />
+  <meta property="og:url" content="https://levizim-pre-wedding.joao2444g.chatgpt.site/" />
+  <meta property="og:image" content="levizim-social-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Levizim | Pré-wedding ao vivo" />
   <meta name="twitter:description" content="Antes do sim, a festa já tem nome." />
+  <meta name="twitter:image" content="levizim-social-card.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet" />
@@ -38,7 +43,7 @@
 
   <header class="site-header" data-header>
     <a class="brand" href="#inicio" aria-label="Levizim — voltar ao início">
-      <span class="brand-name">LEVIZIM</span>
+      <img class="brand-logo" src="levizim-logo.png" width="591" height="232" alt="Levizim" />
       <span class="brand-role">cantor + compositor</span>
     </a>
 
@@ -63,6 +68,7 @@
       </video>
       <div class="hero-wash" aria-hidden="true"></div>
       <div class="hero-grid" aria-hidden="true"></div>
+      <img class="hero-signature" src="levizim-logo.png" width="591" height="232" alt="" aria-hidden="true" />
 
       <div class="hero-content">
         <p class="eyebrow reveal">Pré-wedding · welcome party · destination wedding</p>
@@ -151,7 +157,7 @@
       </div>
 
       <div class="performance-collage">
-        <figure class="performance-wide reveal" data-reveal="scale">
+        <figure class="performance-wide reveal" data-reveal="clip">
           <img src="levizim-show-wide-web.jpg" width="2000" height="1333" loading="lazy" decoding="async" data-scroll-shift="-42" alt="Levizim e baixista em um palco iluminado durante o show" />
           <figcaption>AO VIVO · LEVIZIM + BANDA</figcaption>
         </figure>
@@ -160,7 +166,7 @@
           <span>SHOW</span><span>SHOW</span><span>SHOW</span>
         </div>
 
-        <figure class="performance-portrait reveal" data-reveal="right" data-reveal-delay="1">
+        <figure class="performance-portrait reveal" data-reveal="tilt" data-reveal-delay="1">
           <img src="levizim-show-vertical-web.jpg" width="1333" height="2000" loading="lazy" decoding="async" data-scroll-shift="68" alt="Levizim se aproxima do público durante uma apresentação" />
           <figcaption>PERTO O BASTANTE PARA SENTIR</figcaption>
         </figure>
@@ -173,18 +179,70 @@
       </div>
     </section>
 
-    <section class="showreel-section" id="palco" aria-labelledby="showreel-title">
-      <video class="showreel-video" autoplay muted loop playsinline preload="metadata" poster="levizim-noivos.jpg" aria-hidden="true">
-        <source src="hero-real-short.mp4" type="video/mp4" />
-      </video>
-      <div class="showreel-overlay"></div>
-      <div class="showreel-content">
-        <p class="eyebrow reveal">Levizim ao vivo</p>
-        <h2 id="showreel-title" class="showreel-title reveal">A pista responde.<br /><span>Ele conduz.</span></h2>
-        <div class="showreel-bottom reveal">
-          <p>Forró moderno, repertório personalizado e leitura de público para fazer convidados de todos os lugares cantarem juntos.</p>
-          <button class="video-control" type="button" data-video-control aria-label="Pausar vídeo">Pausar filme</button>
+    <section class="film-story" id="palco" aria-labelledby="film-title">
+      <div class="film-sticky">
+        <div class="film-media" aria-hidden="true">
+          <video class="film-video is-active" data-film-video="0" muted loop playsinline preload="none" poster="levizim-show-wide-web.jpg">
+            <source src="stage-smoke-wide-web.mp4" type="video/mp4" />
+          </video>
+          <video class="film-video" data-film-video="1" muted loop playsinline preload="none" poster="crowd-toast-poster.jpg">
+            <source src="crowd-toast-web.mp4" type="video/mp4" />
+          </video>
+          <video class="film-video" data-film-video="2" muted loop playsinline preload="none" poster="levizim-show-vertical-web.jpg">
+            <source src="stage-smoke-close-web.mp4" type="video/mp4" />
+          </video>
+          <video class="film-video" data-film-video="3" muted loop playsinline preload="none" poster="levizim-noivos.jpg">
+            <source src="hero-real-short.mp4" type="video/mp4" />
+          </video>
         </div>
+        <div class="film-grade" aria-hidden="true"></div>
+        <div class="film-light-sweep" aria-hidden="true"></div>
+        <img class="film-signature" src="levizim-logo.png" width="591" height="232" alt="" aria-hidden="true" />
+
+        <div class="film-index" aria-hidden="true">
+          <span data-film-current>01</span>
+          <i><b data-film-progress></b></i>
+          <span>04</span>
+        </div>
+
+        <button class="film-control" type="button" data-film-control aria-label="Pausar filme">
+          <i aria-hidden="true"></i>
+          <span data-film-control-label>Pausar filme</span>
+        </button>
+      </div>
+
+      <div class="film-steps">
+        <article class="film-step film-step--left is-active" data-film-step="0">
+          <div class="film-caption">
+            <p>ATO 01 · A luz acende</p>
+            <h2 id="film-title">O show não começa no refrão. <em>Começa na presença.</em></h2>
+            <span>Levizim entra com a banda, lê a sala e faz a primeira música parecer o momento que todo mundo esperava.</span>
+          </div>
+        </article>
+
+        <article class="film-step film-step--right" data-film-step="1">
+          <div class="film-caption">
+            <p>ATO 02 · O brinde</p>
+            <h3>As taças sobem.<br /><em>A energia também.</em></h3>
+            <span>O encontro deixa de ser recepção e vira memória coletiva — noivos, amigos e família dentro do mesmo coro.</span>
+          </div>
+        </article>
+
+        <article class="film-step film-step--left" data-film-step="2">
+          <div class="film-caption">
+            <p>ATO 03 · Sem distância</p>
+            <h3>Perto o bastante<br /><em>para sentir.</em></h3>
+            <span>Ele atravessa o palco, chama pelo olhar e transforma cada convidado em parte da apresentação.</span>
+          </div>
+        </article>
+
+        <article class="film-step film-step--center" data-film-step="3">
+          <div class="film-caption">
+            <p>ATO 04 · Todo mundo dentro</p>
+            <h3>A pista responde.<br /><em>Ele conduz.</em></h3>
+            <span>Forró moderno, repertório sob medida e leitura de público para terminar com a sensação de que a festa sempre foi daquele jeito.</span>
+          </div>
+        </article>
       </div>
     </section>
 
@@ -216,11 +274,11 @@
         <h2 class="section-title reveal">Não é fundo musical.<br /><em>É o momento.</em></h2>
       </div>
       <div class="gallery-grid">
-        <figure class="gallery-item gallery-wide reveal"><img src="casal-brinde.jpg" alt="Noivos e convidados brindando com Levizim ao fundo" loading="lazy" /><figcaption>O brinde</figcaption></figure>
-        <figure class="gallery-item gallery-tall reveal"><img src="levizim-palco.jpg" alt="Levizim em apresentação ao vivo" loading="lazy" /><figcaption>O artista</figcaption></figure>
-        <figure class="gallery-item reveal"><img src="levizim-noivos.jpg" alt="Levizim cantando ao lado dos noivos" loading="lazy" /><figcaption>A conexão</figcaption></figure>
-        <figure class="gallery-item reveal"><img src="festa-energia.jpg" alt="Convidadas celebrando em frente ao palco" loading="lazy" /><figcaption>A energia</figcaption></figure>
-        <figure class="gallery-item gallery-wide reveal"><img src="pista-aerea.jpg" alt="Pista de dança cheia vista de cima" loading="lazy" /><figcaption>A memória</figcaption></figure>
+        <figure class="gallery-item gallery-wide reveal" data-reveal="clip"><img src="casal-brinde.jpg" alt="Noivos e convidados brindando com Levizim ao fundo" loading="lazy" /><figcaption>O brinde</figcaption></figure>
+        <figure class="gallery-item gallery-tall reveal" data-reveal="tilt"><img src="levizim-palco.jpg" alt="Levizim em apresentação ao vivo" loading="lazy" /><figcaption>O artista</figcaption></figure>
+        <figure class="gallery-item reveal" data-reveal="right"><img src="levizim-noivos.jpg" alt="Levizim cantando ao lado dos noivos" loading="lazy" /><figcaption>A conexão</figcaption></figure>
+        <figure class="gallery-item reveal" data-reveal="scale"><img src="festa-energia.jpg" alt="Convidadas celebrando em frente ao palco" loading="lazy" /><figcaption>A energia</figcaption></figure>
+        <figure class="gallery-item gallery-wide reveal" data-reveal="clip-reverse"><img src="pista-aerea.jpg" alt="Pista de dança cheia vista de cima" loading="lazy" /><figcaption>A memória</figcaption></figure>
       </div>
     </section>
 
@@ -279,7 +337,7 @@
   </main>
 
   <footer class="site-footer">
-    <a class="footer-brand" href="#inicio">LEVIZIM</a>
+    <a class="footer-brand" href="#inicio" aria-label="Levizim — voltar ao início"><img src="levizim-logo.png" width="591" height="232" alt="Levizim" /></a>
     <p>Cantor + compositor · Pré-weddings e eventos</p>
     <div class="footer-links">
       <a href="https://instagram.com/levizimoficial" target="_blank" rel="noopener">Instagram</a>
@@ -290,7 +348,8 @@
   </footer>
 
   <a class="whatsapp-float" data-whatsapp href="https://wa.me/5585997684934" target="_blank" rel="noopener" aria-label="Falar com a equipe do Levizim no WhatsApp">
-    <span>WhatsApp</span><b>↗</b>
+    <span class="whatsapp-glyph" aria-hidden="true"></span>
+    <span class="sr-only">Falar com a equipe do Levizim no WhatsApp</span>
   </a>
 
   <script src="script.js"></script>
