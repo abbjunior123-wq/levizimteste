@@ -12,13 +12,14 @@
   const navToggle = document.querySelector(".nav-toggle");
   const scrollLayers = Array.from(document.querySelectorAll("[data-scroll-shift]"));
   const heroShiftItems = Array.from(document.querySelectorAll("[data-hero-shift]"));
+  const micStory = document.querySelector(".mic-story");
 
   document.querySelectorAll("[data-year]").forEach((node) => {
     node.textContent = String(new Date().getFullYear());
   });
 
   const floatMessage = encodeURIComponent(
-    "Olá! Quero saber mais sobre o show do Levizim para o meu pré-wedding."
+    "Olá! Quero saber mais sobre o Levizim para o nosso casamento."
   );
 
   document.querySelectorAll("[data-whatsapp]").forEach((link) => {
@@ -54,6 +55,13 @@
         });
       } else {
         heroShiftItems.forEach((item) => item.style.setProperty("--scroll-x", "0px"));
+      }
+
+      if (micStory) {
+        const rect = micStory.getBoundingClientRect();
+        const travel = micStory.offsetHeight - viewportHeight;
+        const progress = travel > 0 ? Math.min(1, Math.max(0, -rect.top / travel)) : 0.5;
+        micStory.style.setProperty("--mic-p", progress.toFixed(3));
       }
     }
 
@@ -270,6 +278,47 @@
     activateFilm(0);
   }
 
+  if (micStory) {
+    const micSteps = Array.from(micStory.querySelectorAll("[data-mic-step]"));
+    const micVideo = micStory.querySelector(".mic-video");
+    const micCurrent = micStory.querySelector("[data-mic-current]");
+    const micProgress = micStory.querySelector("[data-mic-progress]");
+
+    const activateMic = (index) => {
+      const next = Math.min(micSteps.length - 1, Math.max(0, Number(index) || 0));
+      micSteps.forEach((step, stepIndex) => step.classList.toggle("is-active", stepIndex === next));
+      if (micCurrent) micCurrent.textContent = String(next + 1).padStart(2, "0");
+      if (micProgress) micProgress.style.width = `${((next + 1) / micSteps.length) * 100}%`;
+    };
+
+    if ("IntersectionObserver" in window && micSteps.length) {
+      const micStepObserver = new IntersectionObserver(
+        (entries) => {
+          const active = entries.find((entry) => entry.isIntersecting);
+          if (active) activateMic(active.target.dataset.micStep);
+        },
+        { threshold: 0, rootMargin: "-45% 0px -45% 0px" }
+      );
+      micSteps.forEach((step) => micStepObserver.observe(step));
+
+      if (micVideo && !reducedMotion && !saveData) {
+        const micVisibility = new IntersectionObserver(
+          ([entry]) => {
+            if (entry && entry.isIntersecting) {
+              micVideo.play().catch(() => {});
+            } else {
+              micVideo.pause();
+            }
+          },
+          { threshold: 0.01, rootMargin: "18% 0px" }
+        );
+        micVisibility.observe(micStory);
+      }
+    }
+
+    activateMic(0);
+  }
+
   const dateInput = document.getElementById("data");
   if (dateInput) {
     const today = new Date();
@@ -292,7 +341,7 @@
         : "Não informada";
 
       const message = [
-        "Olá! Quero consultar a disponibilidade do Levizim para o meu pré-wedding.",
+        "Olá! Quero consultar a disponibilidade do Levizim para o nosso casamento.",
         "",
         `Nome: ${value("nome")}`,
         `WhatsApp: ${value("whatsapp")}`,
